@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import fetchReducer from "./fetchReducer";
+import todo from "./fetchReducer";
 
-const rootReducer = combineReducers({ users: fetchReducer });
+const rootReducer = combineReducers({ todo });
 
 export default rootReducer;

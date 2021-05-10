@@ -1,29 +1,48 @@
 import React from "react";
-import { FETCH_USERS_REQUESTED } from "./actions/constants";
-import { useDispatch, useSelector } from "react-redux";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Users from "./components/users";
+import Todos from "./components/todos";
+import HomePage from "./components/home";
+import Comment from "./components/comment";
 
 function App() {
-  const users = useSelector((state) => state.users);
-  const dispatch = useDispatch();
-
   return (
-    <div className="App">
-      <h1>Test</h1>
-      <button
-        onClick={() => {
-          dispatch({ type: FETCH_USERS_REQUESTED });
-        }}
-      >
-        fetchUsers
-      </button>
-      {users.users.map((user) => {
-        return (
-          <div key={user.id}>
-            <p>{user.name}</p>
-          </div>
-        );
-      })}
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to="/todos">Todos</Link>
+            </li>
+            <li>
+              <Link to="/comment">Post a comment</Link>
+            </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/todos">
+            <Todos />
+          </Route>
+          <Route path="/comment">
+            <Comment />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

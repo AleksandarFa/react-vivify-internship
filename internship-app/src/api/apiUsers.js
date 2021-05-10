@@ -14,6 +14,24 @@ class UsersAPI {
       console.log(err);
     }
   }
+
+  static async getTodos() {
+    try {
+      const response = await clientApi.get("todos");
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async postComment(comment) {
+    try {
+      const comment = await clientApi.post("comments", { comment });
+      return comment.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default UsersAPI;
