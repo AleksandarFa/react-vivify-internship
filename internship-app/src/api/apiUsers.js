@@ -1,10 +1,18 @@
-import axios from "axios";
-import apiClient from "./apiService";
+import defaultAxios from "axios";
+
+const clientApi = defaultAxios.create({
+  baseURL: "https://jsonplaceholder.typicode.com/",
+  headers: { "Content-Type": "application/json" },
+});
 
 class UsersAPI {
   static async getUsers() {
-    const response = await apiClient.get("/users");
-    return response;
+    try {
+      const response = await clientApi.get("users");
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 
